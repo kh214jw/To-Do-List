@@ -10,11 +10,14 @@ export default function Signup(props){
     const [addPassword, setaddPassword] = useState('');
 
     const signup = async() => {
+        //회원가입 성공 시 출력
         try {
+            //회원가입 함수
             const auth = getAuth();
             const result = await createUserWithEmailAndPassword(auth, addEmail, addPassword);
             const addtoDBUser = async () => {
               try {
+                  //파이어베이스에 사용자 정보 저장
                   await addDoc(collection(db, "users"),{
                       name: addname,
                       email: addEmail,
@@ -30,6 +33,7 @@ export default function Signup(props){
             addtoDBUser();
             console.log(result);
             alert("Sign up Success!!")
+            ////회원가입 실패 시 출력
         } catch (error) {
             console.log(error.message)
             alert("Sign up Failed! (check the conditions.)")
@@ -64,13 +68,16 @@ export default function Signup(props){
                 <Button 
                 title="Sign Up!"
                 color= '#FFBD6D'
+                //클릭시 회원가입
                 onPress={signup}
                 ></Button>
             </View>
             <View style={styles.mainButton}>
+              {/* 메인 페이지로 이동 */}
               <Button
                 title="Go To Main"
                 color= '#FFBD6D'
+                //클릭시 "Main"을 컨테이너를 props로 전달
                 onPress={() => props.navigation.navigate("Main")}
                 ></Button>
             </View>

@@ -4,9 +4,11 @@ import {Button, StyleSheet, TextInput, View} from 'react-native';
 const TodoInsert = ({onAddTodo}) => {
     const [NewTodoItem, setNewTodoItem] = useState('');
     const todoInputControler = newTodo => {
+        //새로 입력된 할일을 설정함
         setNewTodoItem(newTodo);
     };
     const addTodoControler = () => {
+        //추가할 할일의 Value 선언
         onAddTodo(NewTodoItem);
         setNewTodoItem('');
     };
@@ -17,11 +19,13 @@ const TodoInsert = ({onAddTodo}) => {
                 style={styles.input}
                 placeholder="Please Enter A To-Do!! ✏️"
                 placeholderTextColor={'#999'}
+                //입력 값을 "todoInputControler"로 전달
                 onChangeText={todoInputControler}
                 value={NewTodoItem}
                 autoCorrect={false}
             />
             <View style={styles.button}>
+                {/* 클릭시 addTodoControler 실행 */}
                 <Button color= '#FFBD6D' title={'ADD'} onPress={addTodoControler} />
             </View>
         </View>
